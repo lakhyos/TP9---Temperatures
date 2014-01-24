@@ -1,0 +1,75 @@
+2-Analyse fonctionnelle:
+
+Structures:
+
+1-Structure Jour:
+
+typedef struct
+{
+  char min; // température minimum
+  char max; // température maximum
+} Jour;
+
+
+Fonctions:
+
+1-Fonction « longueur_mois »
+
+1-a-Spécification des données:
+la fonction reçois comme arguments deux entiers, le premier représente l’année et le 
+deuxième représente le mois. 
+1-b-Spécification du résultat:
+la fonction retourne un nombre de type entier qui représente le nombre de jour d’un mois donné. 
+1-c-Spécification fonctionnelle:
+une fois l’année et le mois sont saisis, la fonction « longueur_mois » effectue un test
+sur le nombre correspondant au numero du mois, pour les mois appartenant a l’interval
+[1, 12]\{2} leurs nombre de jours est affecté directement, suivant les valeurs (par rang du mois) {31, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31}. Pour le mois numero 2, on procède a un deuxième test, celui de l’année, dans le cas ou elle est bissextile(année % 4 = 0) on affecte au moi de février 29 jours, dans le cas contraire 28 jours.
+
+2-Fonction « ecrire_jour »
+
+2-a-Spécification des données:
+la fonction reçois comme arguments un fichier dans lequel seront remplies les données de température, et deux entiers le premier représente le jour et le deuxième représente le mois. 
+2-b-Spécification fonctionnelle:
+une fois le nom du fichier cible, le jour et le mois sont saisis, la fonction « ecrire_jour » affecte a chaque mois un entier temp, dont la valeur sera (suivant le rang du mois-1) dans l’interval {5, 7, 10, 11, 15, 17, 24, 22, 16, 15, 10, 7}. Ainsi pour chaque mois les valeurs min
+et max seront générées, inscrites et successivement comprises dans les intervals [temp-12, temp-2] et [temp+2, temp+12],
+ceci avec les deux operations: min = rand() % 10 + temp[mois - 1] - 12 et
+max = rand() % -10 + temp[mois - 1] + 2.
+
+3-Fonction « lire_jour »
+
+3-a-Spécification des données:
+la fonction reçois comme arguments un fichier du quel sera faite la lecture des données de température, un tableau de type jours de taille 31 et deux entiers le premier représente le mois et le deuxième représente l’année. 
+3-b-Spécification fonctionnelle:
+une fois le nom du fichier cible,le tableau des jours, le mois et l’année sont saisis, la fonction « lire_jour » procède 
+à l’extraction des données correspondants aux temperatures des jours d’un mois défini, pour les mois [1, 12]\{2} le nombre de jours considérés est successivement (par rang du mois) {31, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31}, dans le cas du mois
+de février le nombre de temperatures extraites sera 2*29 dans le cas d’une année bissextiles et 2*28 si non.
+
+4-Fonction « ecrire_mois »
+
+4-a-Spécification des données:
+la fonction reçois comme arguments un fichier dans lequel seront remplies les données de température, et deux entiers le premier représente l’année et le deuxième représente le mois. 
+4-b-Spécification fonctionnelle:
+après avoir reçu le nom du fichier d’enregistrement, l’année et le mois, la fonction « ecrire_mois » procède a la generation et l’enregistrement des temperatures de l’année cible en faisant appel a la fonction « ecrire_jour » pour chaque mois de l’année citée.
+
+5-Fonction « lire_mois »
+
+5-a-Spécification des données:
+la fonction reçois comme arguments un fichier du quel sera faite la lecture des données de température, un tableau de type jour de 2 dimensions et l’année. 
+5-b-Spécification fonctionnelle:
+après avoir reçu le nom du fichier de lecture, le tableau des jours et mois, et l’année cible, la fonction « lire_mois » procède au remplissage du tableau en faisant appel a la fonction « lire_jour » pour chaque ligne lu depuis le fichier, pour l’ensemble des lignes correspondants a chaque mois, jusque’à remplir les 12 mois de l’année cible. 
+
+
+6-Fonction « generation_temperatures »
+
+6-a-Spécification des données:
+la fonction reçois comme arguments un fichier dans lequel seront remplies les données de température, et deux entiers le premier représente l’année de debut de génération des températures et le deuxième représente l’année de fin de génération des températures.
+6-b-Spécification fonctionnelle:
+après avoir reçu le nom du fichier d’enregistrement et les deux années limites, la fonction « generation_temperatures » procède a la generation et l’enregistrement des temperatures des jours correspondant a (anFin-anDebut+1) années, et qui se situent entre les années anDebut et anFin. cela en faisant appel a la fonction « ecrire_mois » pour chaque année.
+
+7-Fonction « lire »
+
+7-a-Spécification des données:
+la fonction reçois comme arguments un fichier du quel sera faite la lecture des données de température et un tableau de type jour de trois dimensions.
+4-b-Spécification fonctionnelle:
+après avoir reçu le nom du fichier de lecture et le tableau de remplissage, la fonction « lire » procède au remplissage du tableau par les temperatures a partir du fichier, ceci en faisant appel a la fonction « lire_mois » (anFin-anDebut+1) fois  pour chaque année entre anDebut et anFin. 
+

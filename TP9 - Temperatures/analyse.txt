@@ -1,0 +1,43 @@
+1-Analyse:
+
+Problème: Affecter des temperatures (une maximale et l’autre minimale) pour chacun des jours des années comprises entre 1901 et 2099,
+ensuite transférer les données générées dans un fichier de type .txt dans la structure sera lisible et claire par un éditeur de texte.
+Ensuite, viens l’étape de la lecture, qui consiste a extraire les données stockées dans un fichier (précédemment crée) et les stocker
+dans une structure de données compatible, pour faciliter la lecture des temperatures et ainsi mieux exploiter les données du fichier,
+avec des fonctions d’interrogations.
+
+Afin de disposer d’un maximum d’information pour l’analyse et la résolution du problème posé, il est nécessaire d’avoir des connaissances
+au sujet de la structure du calendrier et des saisons.
+
+-Une année normale est composée de 365 jours, une année bissextile est composée de 366 jours,
+-Une année bissextile est toujours divisible par 4.
+-Une année est composée de 12 mois.
+-Chaque mois est composé d’un nombre de jours variant entre 28 et 31; les mois 1,3,5,7,8,10,12 ont 31 jours,
+ les mois 4,6,9,11 ont 30 jours et le mois 2 a 29 jours dans le cas d’une année bissextile et 28 jours dans le cas normal.
+
+-Un jour sera caractérisé par deux températures (la premiere représente la valeur minimale enregistrée pendant la journée,
+ la seconde est celle de la valeur maximale).
+-Une année est composée de 4 trimestres chaque trimestre est une saison dont la longueur est approximative a 90 jours.
+-Lors de la generation des temperatures et pour rester dans le domaine de la logique (ne pas avoir des temperatures avec le temps
+ d’un mois d’une saison quelconque) (ex : température max = 45 au mois de décembre.) chaque mois aura un interval de temperatures
+ bien défini et bien compatible), en plus de la condition (min < max).
+-Pour l’affectation des intervals de temperatures possibles pour chaque mois, on vas commencer par affecter a chaque mois un nombre t,
+ ainsi le min sera dans l’interval [t-12, t-2] et le max dans l’interval [t+2, t+12]. Ainsi on aura verifier les deux conditions de validité des données générées (des temperatures compatibles avec chaque saison et logiques(min < max)).
+
+Exemple 1: Les temperatures min et max du jour 2000/01/12.
+pour le mois 1 on aurais défini t = 5.
+ainsi: min sera dans [-7, 3] min = 2.
+       max sera dans [7, 17] max = 15.
+ 
+Exemple 2: Les temperatures min et max du jour 1982/07/09.
+pour le mois 1 on aurais défini t = 24.
+ainsi: min sera dans [12, 22] min = 15.
+       max sera dans [26, 36] max = 33.
+
+Exemple 3: Les temperatures min et max du jour 1952/04/23.
+pour le mois 1 on aurais défini t = 11.
+ainsi: min sera dans [-1, 9] min = 8.
+       max sera dans [13, 23] max =21.
+
+
+         
