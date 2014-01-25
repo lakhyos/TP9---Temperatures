@@ -1,0 +1,100 @@
+Objectifs: Les deux objectifs majeurs de ce programme sont:
+-Générer une base de donnée de températures, s’etallant sur une période de 199 années, en les insérant dans un fichier.
+-Récupérer les données concernant les températures des jours (de l’année 1901 à 2099) depuis un fichier, et leurs appliquer des fonction d’interrogation (Max, Min, Moyenne…) pour avoir des conclusions et des résultats plus
+complexes.
+
+1-Type de données
+
+-dans la première étape qui est la génération des températures, la donnée est un couple (année, année). Qui signifie l’année du début et l’année de fin de génération des températures.
+-dans la deuxième étape qui est l’extraction des données depuis le fichier, dans un premier lieu on va remplir
+notre structure avec les températures disponibles, ainsi le type de donnée sera un couple (année, année). Or une fois la structure est remplie le type de données dans ce cas peut varier en fonction de la fonction d’interrogation utilisée;
+un triplet (année, mois, jour) pour la fonction qui donne les températures min et max d’un jour quelconque.
+un couple (année, mois) pour la fonction qui donne la moyenne de température pour un mois quelconque.
+une donnée (année) pour la fonction qui détermine le mois le plus chaud (ou froid) d’une année quelconque.
+
+2-Variables principales
+
+dans la gestion de ce programme on aura besoin de deux types de variables:
+-la première est une structure de donnée du nom de « Jour » contenant deux entiers, le premier pour la température
+min et le deuxième pour la température max.
+-la deuxième est un tableau de trois dimensions de type « Jour » dans les composantes sont des entiers, et seront considérées de la façon suivante: Jour[année][mois][jour].
+
+3-Initialisation des donees
+
+Comme il y a deux étape de gestion des données dans ce projet, il y aura automatiquement deux méthodes distinctes d’initialisation des variables:
+
+-dans la première étape les variables min et max seront initialisées de façon aléatoire avec quelques conditions pour garantir leurs validité.
+-dans la deuxième étape la variable tableau sera initialisé depuis un fichier (précédemment crée).
+
+4-Fonctions de base
+
+Dans le programme nous auront besoin de fonction modulo 4 et rand, pour determiner si l’année est bissextile ou non et générer les données concernant les température de façon aléatoire.
+
+Definition des fonctions MOD4 et rand()% en language C
+
+int MOD4(int valeur)
+{
+faie la division euclidienne de valeur sur 4;
+retourner le reste de cette division qui sera dans l’interval [0, 3];
+}
+
+int rand()%valeur
+{
+générer un entier quelconque;
+faire sa division euclidienne sur valeur;
+retourner le reste de la division précédente, qui sera un entier dans l’intervalle [0, valeur-1];
+}
+
+5-Programmation des fonctions
+
+longueur_mois,
+ecrire_jour,
+ecrire_mois,
+generation_temperatures,
+lecture;
+
+fonction longueur_mois(an, mois:entier):entier
+{
+retourner (29 si (mois==2 et MOD4(an)==0),
+           28 si (mois==2 et MOD4(an)!=0),
+           30+(((mois * 9) / 8) & 1) sinon);
+}
+
+fonction ecrire_jour(fichier:Fichier, jour, mois:entier):procédure 
+{
+temp[] = {5, 7, 10, 11, 15, 17, 24, 22, 16, 15, 10, 7}:entier;
+min = rand()%10 + temp[mois - 1] - 12:entier;
+max = rand()%-10 + temp[mois - 1] + 2:entier;
+écrir les valeurs de min et max dans le fichier fichier;
+}
+
+fonction ecrire_mois(fichier:Fichier, an, mois:entier):procédure
+{
+jour:entier;
+écrir la valeur du mois dans la fichier;
+pour(jour allant de 1 à longueur_mois(an, mois) 
+    écrire les températures min et max (ecrire_jour(fichier,jour, mois)) dans le fichier;
+}
+
+fonction generation_temperatures(fichier:Fichier, anDebut, anFin:entier):procédure
+{
+déclarer an et mois:entier;
+pour(an allant de anDebut à anFin)
+{
+  écrire le nom de l’année dans le fichier;
+  pour(mois allant de 1 a 12) 
+    écrire les températures des jours du mois (ecrir_mois(fichier, an, mois) dans le fichier;
+}
+
+fonction lecture(fichier:char, jour[anFin-anDebut+1][mois][jour]:Jour):procédure 
+{
+ouvrir le fichier dont le nom est « fichier » en mode lecture;
+si le fichier n’est pas vide
+   tanqu’on a pas atteint la fin du fichier
+   {
+       lire l’année;
+       lire les mois;
+   }
+sinon retourner le message d’erreur ou d’echec d’ouverture du fichier cible;
+}
+   
